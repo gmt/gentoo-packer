@@ -25,10 +25,14 @@
         "<wait>"
       ],
       "boot_wait": "5s",
-      "disk_size": 60000,
+      "disk_size": 120000,
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}" ],
+	[ "modifyvm", "{{.Name}}", "--memory", "{{user `memory`}}" ]
+      ],
       "guest_additions_mode": "disable",
       "guest_os_type": "Gentoo_64",
-      "headless": false,
+      "headless": true,
       "iso_checksum": "20dc09c811940c8742a9d1c7fa6da7cf8eaecf6c24797c67a00ba3d36e80d66f3d2555c6dbe9be303c0304cbdf51eaaca2deda8f523872912f58119663b4ffc5",
       "iso_checksum_type": "sha512",
       "iso_url": "http://distfiles.gentoo.org/releases/amd64/autobuilds/{{user `stage3`}}/install-amd64-minimal-{{user `stage3`}}.iso",
@@ -57,7 +61,8 @@
       "environment_vars": [
         "STAGE3={{user `stage3`}}",
         "VM_TYPE=virtualbox",
-        "SCRIPTS=/tmp"
+        "SCRIPTS=/tmp",
+        "PARALLELISM={{user `cpus`}}"
       ],
       "scripts": [
         "provision.sh"
@@ -66,6 +71,8 @@
     }
   ],
   "variables": {
+    "cpus": "4",
+    "memory": "1024",
     "password": "packer",
     "stage3": "20141002",
     "username": "root"

@@ -11,6 +11,16 @@ then
   SCRIPTS=.
 fi
 
+pvmakeopts=-j1
+if [[ $PARALLELISM -gt 1 ]]
+then
+  pvmakeopts="-j$(( PARALLELISM + 1))"
+fi
+
+export pvmakeopts
+export STAGE3
+export SCRIPTS
+
 chmod +x $SCRIPTS/scripts/*.sh
 
 for script in \
@@ -25,9 +35,13 @@ for script in \
   grub        \
   $VM_TYPE    \
   network     \
+  vim         \
   vagrant     \
   cleanup
 do
+  echo "========================================="
+  echo "= Doing the ${script} stuff"
+  echo "========================================="
   "$SCRIPTS/scripts/$script.sh"
 done
 
