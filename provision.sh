@@ -1,14 +1,19 @@
 #!/bin/bash
 
-if [[ -z $STAGE3 ]]
+if [[ -z "$STAGE3" ]]
 then
   echo "STAGE3 environment variable must be set to a timestamp."
   exit 1
 fi
 
-if [[ -z $SCRIPTS ]]
+if [[ -z "$SCRIPTS" ]]
 then
   SCRIPTS=.
+fi
+
+if [[ -z "$PROV_LOCALE" ]]
+then
+  PROV_LOCALE="en_US.UTF-8 UTF-8"
 fi
 
 pvmakeopts=-j1
@@ -20,6 +25,7 @@ fi
 export pvmakeopts
 export STAGE3
 export SCRIPTS
+export PROV_LOCALE
 
 chmod +x $SCRIPTS/scripts/*.sh
 
@@ -33,6 +39,7 @@ for script in \
   fstab       \
   kernel      \
   grub        \
+  locale      \
   $VM_TYPE    \
   network     \
   vim         \

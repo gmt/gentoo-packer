@@ -59,10 +59,11 @@
     },
     {
       "environment_vars": [
-        "STAGE3={{user `stage3`}}",
-        "VM_TYPE=virtualbox",
         "SCRIPTS=/tmp",
-        "PARALLELISM={{user `cpus`}}"
+        "STAGE3={{user `stage3`}}",
+        "PARALLELISM={{user `cpus`}}",
+        "PROV_LOCALE=\"{{user `locale`}}\"",
+        "VM_TYPE=virtualbox"
       ],
       "scripts": [
         "provision.sh"
@@ -72,6 +73,7 @@
   ],
   "variables": {
     "cpus": "4",
+    "locale": "en_US.UTF-8 UTF-8",
     "memory": "1024",
     "password": "packer",
     "stage3": "20141002",
