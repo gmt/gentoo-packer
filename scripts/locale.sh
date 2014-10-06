@@ -14,6 +14,6 @@ chroot /mnt/gentoo /bin/bash <<-EOF
 	  echo "${PROV_LOCALE}" >> /etc/locale.gen
 	fi
 	locale-gen
-	eselect locale set "${PROV_LOCALE}"
+	eselect locale set "${PROV_LOCALE% *}"
 	env-update
 EOF
