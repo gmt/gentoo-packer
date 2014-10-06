@@ -21,8 +21,8 @@ chroot /mnt/gentoo /bin/bash <<-EOF
 	  mv -v /etc/portage/profile/package.provided{.packer.bak,}
 	else
 	  rm -v /etc/portage/profile/package.provided
-	  if [[ $(ls -a /etc/portage/profile/package.provided | wc -l) -eq 2 ]] ; then
-	    rmdir /etc/portage/profile
+	  if [[ $(ls -a /etc/portage/profile/package.provided 2>/dev/null | wc -l) -eq 2 ]] ; then
+	    rmdir -v /etc/portage/profile
 	  fi
 	fi
 EOF
@@ -50,10 +50,12 @@ EOF
 mv /mnt/gentoo/zerofree* ./
 cd zerofree*/
 
+echo "Remounting /mnt/gentoo read-only"
 mount -o remount,ro /mnt/gentoo
 echo "Running: zerofree /dev/sda4..."
 ./zerofree /dev/sda4
 
+echo "Cleaning up swap..."
 swapoff /dev/sda3
 dd if=/dev/zero of=/dev/sda3
 mkswap /dev/sda3
