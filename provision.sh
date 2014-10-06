@@ -44,6 +44,7 @@ for script in \
   network     \
   vim         \
   vagrant     \
+  DuNworld    \
   cleanup
 do
   echo "========================================="

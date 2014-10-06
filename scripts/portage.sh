@@ -44,4 +44,5 @@ chroot /mnt/gentoo /bin/bash <<-EOF
 	cat /etc/portage/make.conf
 	echo '(EOF)'
 	echo
+	emerge -1 sys-apps/portage
 EOF
