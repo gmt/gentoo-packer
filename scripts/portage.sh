@@ -9,6 +9,7 @@ chroot /mnt/gentoo /bin/bash <<-EOF
 	echo "CXXFLAGS=\"\\\${CXXFLAGS} -mtune=core2\"" >> /etc/portage/make.conf
 	echo >> /etc/portage/make.conf
 	echo "USE=\"\\\${USE} vim-syntax\"" >> /etc/portage/make.conf
+	echo "USE=\"\\\${USE} bash-completion\"" >> /etc/portage/make.conf
 	echo >> /etc/portage/make.conf
 	echo "EMERGE_DEFAULT_OPTS=\"\\\${EMERGE_DEFAULT_OPTS} --verbose\"" >> /etc/portage/make.conf
 	echo "FEATURES=\"\\\${FEATURES} unmerge-orphans\"" >> /etc/portage/make.conf
